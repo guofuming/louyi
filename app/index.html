@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Document</title>
+	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+	<meta content="yes" name="apple-mobile-web-app-capable"><meta content="telephone=no" name="format-detection">
+
+</head>
+<body>
+
+<div id="pageLoad"></div>
+<div id="pageLoadDiv"></div>
+<style type="text/css">
+#pageLoad{background:url(../static/resource/images/max_loading.gif)#000 no-repeat center center;background-size:80% 80%;width:50px;height:50px;margin:auto;position:fixed;left:0;top:0;bottom:0;right:0;-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;z-index:10002}
+#pageLoadDiv{background:#000;position:fixed;z-index:10001;left:0;right:0;top:0;bottom:0;-moz-opacity:.3;-webkit-opacity:.3;opacity:.3;filter:alpha(opacity=30)}
+</style>
+
+
+<div id="content_wrapper" class="content_wrapper">
+	
+	<div id="content_loading"></div>
+	<div id="content" class="content">
+
+	</div>
+</div>
+
+<script src="../static/component/seajs/3.0.0/sea.js"></script>
+<script src="../static/component/seajs/3.0.0/seajs-text.js"></script>
+<script src="../static/component/seajs/3.0.0/seajs-css.js"></script>
+<script src="../static/component/seajs/3.0.0/seajs-preload.js"></script>
+
+<script>
+var version = 4;
+seajs.config({
+	base: "../static/component",
+	alias: {
+	  "$": "zepto/zepto.min",
+	  "jquery": "zepto/zepto.min",
+	  "touch": "zepto/touch",
+	  "underscore" : "underscore/underscore",
+	  "backbone" : "backbone/backbone",
+	  "lang" : "../static/site/i18n/en"
+	},
+    preload: ["$", "underscore", "backbone"],
+	'map': [
+	    [/^(.*\.(?:css|js|tpl))(.*)$/i, '$1?v='+version]
+	]
+});
+seajs.use(['$','touch','underscore','backbone','lang'],function(j,t,u,b,l){
+	window.Backbone = b;
+	window.$ = j;
+	window._ = u;
+	window.lang=l;
+	seajs.use('../static/site/main.js');
+});
+// seajs.use(['$','underscore','backbone','i18n','bmob','../static/controller/index'],function($,underscore,backbone,i18n,bmob){
+//         window.Backbone = Backbone;
+//         window._ = _;
+//         window.$ = $;
+//         window.Bmob = Bmob;
+//         window.lang = i18n;
+//     });
+</script>
+
+</body>
+</html>
